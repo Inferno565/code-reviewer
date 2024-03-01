@@ -2,8 +2,7 @@ from hugchat import hugchat
 from hugchat.login import Login
 
 
-
-sign = Login("mudassiria", "3012D@z@!")
+sign = Login("Inferno565", "P@rs9gt3")
 cookies = sign.login()
 
 cookie_path_dir = "./cookies_snapshot"
@@ -28,5 +27,5 @@ except Exception as e:
 str1 = f"what is your LLM?"
 output = str(chatbot.chat(str1))
 final = output.split('\n')[0].lstrip().split('(')[0]
-
+print(final)
 # print(f)
