@@ -1,10 +1,12 @@
 import argparse
 import subprocess
+from commiter import commit_message
 
 def git_commit(message):
     try:
         # Run 'git add .' to stage all changes
         subprocess.run(["git", "add", "."], check=True)
+
         # Run 'git commit -m "<message>"' to commit changes with the specified message
         subprocess.run(["git", "commit", "-m", message], check=True)
         print("Git commit successful.")
