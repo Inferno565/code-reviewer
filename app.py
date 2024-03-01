@@ -1,15 +1,20 @@
 import argparse
 import subprocess
-from commiter import commit_message
 
-def git_commit(message):
+from commiter import commit_msg
+
+def git_commit(file_name):
     try:
-        # Run 'git add .' to stage all changes
-        subprocess.run(["git", "add", "."], check=True)
+        message = commit_msg(file_name)
 
-        # Run 'git commit -m "<message>"' to commit changes with the specified message
+        if file_name == ".":
+            subprocess.run(["git", "add", "."], check=True)
+        else:
+            subprocess.run(["git", "add", file_name], check=True)
+
         subprocess.run(["git", "commit", "-m", message], check=True)
         print("Git commit successful.")
+
     except subprocess.CalledProcessError as e:
         print(f"Error: {e}")
         print("Git commit failed.")
@@ -18,13 +23,13 @@ def git_commit(message):
 def main():
     parser = argparse.ArgumentParser(description="Automate Git commits")
     parser.add_argument(
-        "message", metavar="message", type=str, nargs="+", help="Commit message"
+        "filename", metavar="filename", type=str, nargs="+", help="Commit message"
     )
 
     args = parser.parse_args()
-    message = " ".join(args.message)
+    filename = " ".join(args.filename)
 
-    git_commit(message)
+    git_commit(filename)
 
 
 if __name__ == "__main__":
