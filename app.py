@@ -8,7 +8,6 @@ from reviewer import review
 
 def git_commit(file_name):
     try:
-
         if file_name == ".":
             subprocess.run(["git", "add", "."], check=True)
         else:
@@ -17,6 +16,9 @@ def git_commit(file_name):
         message = commit_msg(file_name)
         subprocess.run(["git", "commit", "-m", message], check=True)
         print("Git commit successful.")
+
+        choice = input("Do you want to commit changes? (y/n)")
+        new_file = open()
 
     except subprocess.CalledProcessError as e:
         print(f"Error: {e}")
