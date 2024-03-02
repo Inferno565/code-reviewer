@@ -3,6 +3,7 @@ import subprocess
 
 from commiter import commit_msg
 
+
 def git_commit(file_name):
     try:
         message = commit_msg(file_name)
@@ -18,6 +19,15 @@ def git_commit(file_name):
     except subprocess.CalledProcessError as e:
         print(f"Error: {e}")
         print("Git commit failed.")
+
+
+# def git_push():
+#     try:
+#         subprocess.run(["git", "push"], check=True)
+#         print("Git Push Successfull.")
+#     except subprocess.CalledProcessError as e:
+#         print(f"Error: {e}")
+#         print("Git commit failed.")
 
 
 def main():

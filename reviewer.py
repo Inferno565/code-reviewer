@@ -1,4 +1,5 @@
 from openai import OpenAI
+
 file_path = "test.py"
 
 try:
@@ -20,9 +21,12 @@ completion = client.chat.completions.create(
     messages=[
         {
             "role": "system",
-            "content": "You are a code review assistant, skilled in explaining complex programming concepts.",
+            "content": "You are a code review assistant, skilled in explaining complex programming concepts, refactoring code to optimize it and also check for logical and syntactical errors",
         },
-        {"role": "user", "content": f"Explain the following code: \n{file_data}"},
+        {
+            "role": "user",
+            "content": f"State all the potential issues possible from the following code, if not state the time complexity: \n{file_data}",
+        },
     ],
 )
 
