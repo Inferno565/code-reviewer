@@ -1,18 +1,20 @@
-import argparse
 import subprocess
+import sys
 
 from commiter import commit_msg
+from optimizer import optimize
+from reviewer import review
 
 
 def git_commit(file_name):
     try:
-        message = commit_msg(file_name)
 
         if file_name == ".":
             subprocess.run(["git", "add", "."], check=True)
         else:
             subprocess.run(["git", "add", file_name], check=True)
-
+        
+        message = commit_msg(file_name)
         subprocess.run(["git", "commit", "-m", message], check=True)
         print("Git commit successful.")
 
@@ -31,16 +33,20 @@ def git_commit(file_name):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Automate Git commits")
-    parser.add_argument(
-        "filename", metavar="filename", type=str, nargs="+", help="Commit message"
-    )
+    filename = sys.argv[1]
 
-    args = parser.parse_args()
-    filename = " ".join(args.filename)
+    if '-r' in sys.argv:
+        print(review(filename))
 
-    git_commit(filename)
+    if '-o' in sys.argv:
+        print(optimize(filename))
+    
+    if '-c' in sys.argv:
+        git_commit(filename)
 
+
+    # git_commit(filename)
+    # print(optimize(filename))
 
 if __name__ == "__main__":
     main()

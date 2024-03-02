@@ -32,8 +32,3 @@ def commit_msg(file_name):
     final = output.split("\n")[0].lstrip().split("(")[0]
 
     return final
-
-# print(commit_msg("test.py"))
-# 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
-
-# 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
